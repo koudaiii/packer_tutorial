@@ -1,0 +1,40 @@
+name: Packer Build
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup HashiCorp Packer
+        uses: hashicorp/setup-packer@v2.0.0
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Run `packer init`
+        id: init
+        run: "packer init ."
+        directory: hcp-packer-ubuntu22-base
+
+      - name: Run `packer validate`
+        id: validate
+        run: "packer validate ."
+        directory: hcp-packer-ubuntu22-base
+
+      - name: Build Artifact
+        if: ${{ !env.ACT }}
+        run: packer build -color=true -on-error=abort .
+        directory: hcp-packer-ubuntu22-base
+        env:
+            HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
+            HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
+            HCP_PACKER_BUILD_FINGERPRINT: "run.id.${{ github.run_id }}.run.attempt.${{ github.run_attempt }}"
