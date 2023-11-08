@@ -31,13 +31,13 @@ jobs:
         id: vars
         run: |
          echo "" >> packer.auto.pkrvars.hcl
-         echo "az_region          = 'japaneast'" >> packer.auto.pkrvars.hcl
-         echo "az_resource_group  = 'packer_tutorial'" >> packer.auto.pkrvars.hcl
-         echo "az_image_gallery   = 'packer_tutorial_image_gallery'" >> packer.auto.pkrvars.hcl
-         echo "az_subscription_id = '${{ secrets.AZURE_SUBSCRIPTION }}'" >> packer.auto.pkrvars.hcl
-         echo "department         = 'GPS JP Tech'"  >> packer.auto.pkrvars.hcl
-         echo "owner              = 'image.engineer'"  >> packer.auto.pkrvars.hcl
-         echo "prefix             = 'gpsjptech'"  >> packer.auto.pkrvars.hcl
+         echo '"az_region          = \"japaneast\"" >> packer.auto.pkrvars.hcl'
+         echo '"az_resource_group  = \"packer_tutorial\"" >> packer.auto.pkrvars.hcl'
+         echo '"az_image_gallery   = \"packer_tutorial_image_gallery\"" >> packer.auto.pkrvars.hcl'
+         echo '"az_subscription_id = \"${{ secrets.AZURE_SUBSCRIPTION }\" >> packer.auto.pkrvars.hcl'
+         echo '"department         = \"GPS JP Tech\""  >> packer.auto.pkrvars.hcl'
+         echo '"owner              = \"image.engineer\""  >> packer.auto.pkrvars.hcl'
+         echo '"prefix             = \"gpsjptech\""  >> packer.auto.pkrvars.hcl'
 
       - name: Run `packer validate`
         id: validate
