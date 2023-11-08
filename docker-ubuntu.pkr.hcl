@@ -43,4 +43,17 @@ build {
   provisioner "shell" {
     inline = ["echo Running $(cat /etc/os-release | grep VERSION= | sed 's/\"//g' | sed 's/VERSION=//g') Docker image."]
   }
+
+  post-processor "docker-tag" {
+    repository = "learn-packer"
+    tags       = ["ubuntu-xenial", "packer-rocks"]
+    only       = ["docker.ubuntu"]
+  }
+
+  post-processor "docker-tag" {
+    repository = "learn-packer"
+    tags       = ["ubuntu-bionic", "packer-rocks"]
+    only       = ["docker.ubuntu-bionic"]
+  }
+
 }
