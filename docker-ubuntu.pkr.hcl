@@ -17,10 +17,16 @@ source "docker" "ubuntu" {
   commit = true
 }
 
+source "docker" "ubuntu-bionic" {
+  image  = "ubuntu:bionic"
+  commit = true
+}
+
 build {
   name = "learn-packer"
   sources = [
-    "source.docker.ubuntu"
+    "source.docker.ubuntu",
+    "source.docker.ubuntu-bionic",
   ]
 
   # This provisioner runs first
@@ -35,6 +41,6 @@ build {
   }
   # This provisioner runs last
   provisioner "shell" {
-    inline = ["echo Running ${var.docker_image} Docker image."]
+    inline = ["echo Running $(cat /etc/os-release | grep VERSION= | sed 's/\"//g' | sed 's/VERSION=//g') Docker image."]
   }
 }
