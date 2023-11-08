@@ -17,6 +17,8 @@ build {
   sources = [
     "source.docker.ubuntu"
   ]
+
+  # This provisioner runs first
   provisioner "shell" {
     environment_vars = [
       "FOO=hello world",
@@ -25,5 +27,9 @@ build {
       "echo Adding file to Docker Container",
       "echo \"FOO is $FOO\" > example.txt",
     ]
+  }
+  # This provisioner runs last
+  provisioner "shell" {
+    inline = ["echo This provisioner runs last"]
   }
 }
