@@ -41,6 +41,6 @@ build {
   }
   # This provisioner runs last
   provisioner "shell" {
-    inline = ["echo Running ${var.docker_image} Docker image."]
+    inline = ["echo Running $(cat /etc/os-release | grep VERSION= | sed 's/\"//g' | sed 's/VERSION=//g') Docker image."]
   }
 }
