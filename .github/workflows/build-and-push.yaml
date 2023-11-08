@@ -6,6 +6,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hcp-packer-ubuntu22-base
     permissions:
       id-token: write
       contents: read
@@ -23,17 +26,14 @@ jobs:
       - name: Run `packer init`
         id: init
         run: "packer init ."
-        directory: hcp-packer-ubuntu22-base
 
       - name: Run `packer validate`
         id: validate
         run: "packer validate ."
-        directory: hcp-packer-ubuntu22-base
 
       - name: Build Artifact
         if: ${{ !env.ACT }}
         run: packer build -color=true -on-error=abort .
-        directory: hcp-packer-ubuntu22-base
         env:
             HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
             HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
