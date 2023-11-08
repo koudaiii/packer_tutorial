@@ -35,6 +35,6 @@ build {
   }
   # This provisioner runs last
   provisioner "shell" {
-    inline = ["echo This provisioner runs last"]
+    inline = ["echo Running ${var.docker_image} Docker image."]
   }
 }
