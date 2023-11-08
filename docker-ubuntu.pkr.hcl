@@ -7,6 +7,11 @@ packer {
   }
 }
 
+variable "docker_image" {
+  type    = string
+  default = "ubuntu:xenial"
+}
+
 source "docker" "ubuntu" {
   image  = "ubuntu:xenial"
   commit = true
