@@ -9,7 +9,7 @@ packer {
 
 locals {
   timestamp  = regex_replace(timestamp(), "[- TZ:]", "")
-  image_name = "${var.prefix}-ubuntu22-nginx-${local.timestamp}"
+  image_name = "${var.prefix}-ubuntu22-base-${local.timestamp}"
 }
 
 source "azure-arm" "base" {
