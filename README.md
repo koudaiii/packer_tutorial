@@ -38,10 +38,10 @@ export HCP_CLIENT_SECRET=
 - Azure account
 - `az` and `az login`
 - Subscription Contributor role
-- `az account show --query "{ subscription_id: id }" -o json | jq -r .subscription_id`
+- you can get <subscription_id> below. `az account show --query "{ subscription_id: id }" -o json | jq -r .subscription_id`
 
 ```console
-$ cd  hcp-packer-ubuntu22-base
+$ cd hcp-packer-ubuntu22-base
 $ script/setup-hcp-packer
 ```
 
