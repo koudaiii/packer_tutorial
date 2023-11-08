@@ -1,0 +1,35 @@
+#!/bin/bash
+
+az_subscription_id=<subscription_id>  # Must already exist
+az_region=japaneast
+az_resource_group=packer_tutorial  # Must already exist
+az_image_gallery=packer_tutorial_image_gallery
+az_image_def_name=ubuntu22-base
+
+az login
+
+az provider register -n Microsoft.VirtualMachineImages
+az provider register -n Microsoft.Compute
+az provider register -n Microsoft.KeyVault
+az provider register -n Microsoft.Storage
+az provider register -n Microsoft.Network
+
+az group create -n $az_resource_group -l $az_region
+
+# az ad sp create-for-rbac --name "vm-image-creator" --role Contributor --scopes /subscriptions/$az_subscription_id --json-auth
+# or you need write "use_azure_cli_auth = true" in your packer template
+
+az sig create \
+    -g $az_resource_group \
+    --gallery-name $az_image_gallery
+
+az sig image-definition create \
+   -g $az_resource_group \
+   --gallery-name $az_image_gallery \
+   --gallery-image-definition $az_image_def_name \
+   --publisher myIbPublisher \
+   --offer myOffer \
+   --sku mySKU \
+   --hyper-v-generation V2 \
+   --os-type Linux
+

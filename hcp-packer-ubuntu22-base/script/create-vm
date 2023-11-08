@@ -1,0 +1,48 @@
+#!/bin/bash
+
+prefix=$(date "+%Y%m%d%H%M%S")
+
+az_subscription_id=<subscription_id>  # Must already exist az account show --query "{ subscription_id: id }" -o json | jq -r .subscription_id
+az_image_gallery_resource_group=packer_tutorial
+az_image_gallery=packer_tutorial_image_gallery
+az_image_def_name=ubuntu22-base
+
+az_region=japaneast
+az_resource_group=$prefix-privateisu  # Must already exist
+
+az_vm_name=$prefix-vm
+az_vm_size=Standard_DS2_v2 # DS2 v2: 2 vCPU、7 GB の RAM、14 GB の一時ストレージ, $0.140/時間
+
+az_vm_image_tag=<az_vm_image_tag> # Must already exist
+az_vm_image="/subscriptions/$az_subscription_id/resourceGroups/$az_image_gallery_resource_group/providers/Microsoft.Compute/galleries/$az_image_gallery/images/$az_image_def_name/versions/$az_vm_image_tag"
+
+az login
+
+az group create -n $az_resource_group -l $az_region
+
+az vm create \
+    --resource-group $az_resource_group \
+    --name  $az_vm_name \
+    --image $az_vm_image \
+    --admin-username azureuser \
+    --location $az_region \
+    --size $az_vm_size \
+    --generate-ssh-keys
+
+az vm open-port \
+    --resource-group $az_resource_group \
+    --name $az_vm_name \
+    --port 80
+
+echo ""
+echo "Complated!"
+echo ""
+echo "----------------------------------------------------------------"
+echo "# How to login to VM"
+echo ""
+echo "ssh $(whoami)@$(az vm show -n $az_vm_name -g $az_resource_group --show-details -o json --query publicIps | jq -r .)"
+echo "ssh micug@$(az vm show -n $az_vm_name -g $az_resource_group --show-details -o json --query publicIps | jq -r .)"
+echo ""
+echo "# How to clean up"
+echo "scripts/cleanup -g $az_resource_group"
+echo ""
