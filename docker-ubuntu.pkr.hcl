@@ -13,7 +13,7 @@ variable "docker_image" {
 }
 
 source "docker" "ubuntu" {
-  image  = "ubuntu:xenial"
+  image  = var.docker_image
   commit = true
 }
 
