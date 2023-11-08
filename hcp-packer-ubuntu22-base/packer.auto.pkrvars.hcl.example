@@ -1,7 +1,7 @@
-az_region = "japaneast"
-az_resource_group = "packer_tutorial" # Must already exist
-az_image_gallery = "packer_tutorial_image_gallery"   # Must already exist
-az_subscription_id = "YOUR_SUBSCRIPTION_ID"
-department = "GPS JP Tech"
-owner = "image.engineer"
-prefix = "gpsjptech"
+az_region          = "japaneast"
+az_resource_group  = "packer_tutorial"               # Must already exist
+az_image_gallery   = "packer_tutorial_image_gallery" # Must already exist
+az_subscription_id = "<subscription_id>"             # Must already exist
+department         = "GPS JP Tech"
+owner              = "image.engineer"
+prefix             = "gpsjptech"
