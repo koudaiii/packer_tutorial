@@ -33,7 +33,7 @@ jobs:
           cp packer.auto.pkrvars.hcl.example packer.auto.pkrvars.hcl
           sed -i .back "s/<subscription_id>/$AZURE_SUBSCRIPTION_ID/" packer.auto.pkrvars.hcl
         env:
-          AZURE_SUBSCRIPTION_ID: ${{ secret.AZURE_SUBSCRIPTION_ID}}
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Run `packer validate`
         id: validate
