@@ -1,6 +1,6 @@
 # packer_tutorial
 
-![](docs/img/cicd-hcp-packer.png)
+![](docs/img/cicd-hcp-packer.jpeg)
 
 ## Manual run in local
 
