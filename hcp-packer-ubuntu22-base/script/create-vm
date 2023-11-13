@@ -8,7 +8,7 @@ az_image_gallery=packer_tutorial_image_gallery
 az_image_def_name=ubuntu22-base
 
 az_region=japaneast
-az_resource_group=$prefix-privateisu  # Must already exist
+az_resource_group=$prefix-privateisu
 
 az_vm_name=$prefix-vm
 az_vm_size=Standard_DS2_v2 # DS2 v2: 2 vCPU、7 GB の RAM、14 GB の一時ストレージ, $0.140/時間

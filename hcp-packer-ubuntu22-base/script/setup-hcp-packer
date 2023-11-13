@@ -2,7 +2,7 @@
 
 az_subscription_id=<subscription_id>  # Must already exist
 az_region=japaneast
-az_resource_group=packer_tutorial  # Must already exist
+az_resource_group=packer_tutorial
 az_image_gallery=packer_tutorial_image_gallery
 az_image_def_name=ubuntu22-base
 
