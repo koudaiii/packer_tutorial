@@ -2,6 +2,8 @@
 
 ![](docs/img/cicd-hcp-packer.png)
 
+[8735x5609](docs/img/cicd-hcp-packer.jpg)
+
 ## Manual run in local
 
 in MacOS
